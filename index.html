@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Flex Panels 💪</title>
+  <link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+  <style>
+    html {
+      box-sizing: border-box;
+      background: #e4e48e;
+      font-family: 'helvetica neue';
+      font-size: 20px;
+      font-weight: 200;
+    }
+    
+    body {
+      margin: 0;
+    }
+    
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+
+    .panels {
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .panel {
+      background: #6B0F9C;
+      box-shadow: inset 0 0 0 5px rgba(255,255,255,0.1);
+      color: white;
+      text-align: center;
+      align-items: center;
+      /* Safari transitionend event.propertyName === flex */
+      /* Chrome + FF transitionend event.propertyName === flex-grow */
+      transition:
+        font-size 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+        flex 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11),
+        background 0.2s;
+      font-size: 20px;
+      background-size: cover;
+      background-position: center;
+      flex: 1;
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panel1 { background-image:url(https://i2.wp.com/matthewwester.com/wp-content/uploads/BibleArtProject/Betram%20of%20Minden%20The%20Creation%20of%20the%20Animals%20Genesis%201%2020.jpg); }
+    .panel2 { background-image:url(https://i2.wp.com/matthewwester.com/wp-content/uploads/BibleArtProject/Betram%20of%20Minden%20The%20Creation%20of%20the%20Animals%20Genesis%201%2020.jpg); }
+    .panel3 { background-image:url(https://i2.wp.com/matthewwester.com/wp-content/uploads/BibleArtProject/Betram%20of%20Minden%20The%20Creation%20of%20the%20Animals%20Genesis%201%2020.jpg); }
+    .panel4 { background-image:url(https://i2.wp.com/matthewwester.com/wp-content/uploads/BibleArtProject/Betram%20of%20Minden%20The%20Creation%20of%20the%20Animals%20Genesis%201%2020.jpg); }
+    .panel5 { background-image:url(https://i2.wp.com/matthewwester.com/wp-content/uploads/BibleArtProject/Betram%20of%20Minden%20The%20Creation%20of%20the%20Animals%20Genesis%201%2020.jpg); }
+    .panel6 { background-image:url(https://i2.wp.com/matthewwester.com/wp-content/uploads/BibleArtProject/Betram%20of%20Minden%20The%20Creation%20of%20the%20Animals%20Genesis%201%2020.jpg); }
+    .panel7 { background-image:url(https://i2.wp.com/matthewwester.com/wp-content/uploads/BibleArtProject/Betram%20of%20Minden%20The%20Creation%20of%20the%20Animals%20Genesis%201%2020.jpg); }
+    .panel8 { background-image:url(https://i2.wp.com/matthewwester.com/wp-content/uploads/BibleArtProject/Betram%20of%20Minden%20The%20Creation%20of%20the%20Animals%20Genesis%201%2020.jpg); }
+    .panel9 { background-image:url(https://i2.wp.com/matthewwester.com/wp-content/uploads/BibleArtProject/Betram%20of%20Minden%20The%20Creation%20of%20the%20Animals%20Genesis%201%2020.jpg); }
+    .panel10 { background-image:url(https://i2.wp.com/matthewwester.com/wp-content/uploads/BibleArtProject/Betram%20of%20Minden%20The%20Creation%20of%20the%20Animals%20Genesis%201%2020.jpg); }
+
+    /* Flex Items */
+    .panel > * {
+      margin: 0;
+      width: 100%;
+      transition: transform 0.5s;
+      flex: .1 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .panel > *:first-child { transform: translateY(-100%); }
+    .panel.open-active > *:first-child { transform: translateY(0); }
+    .panel > *:last-child { transform: translateY(100%); }
+    .panel.open-active > *:last-child { transform: translateY(0); }
+
+    .panel p {
+      text-transform: uppercase;
+      font-family: 'Amatic SC', cursive;
+      text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
+      font-size: 2em;
+    }
+    
+    .panel p:nth-child(2) {
+      font-size: 4em;
+    }
+
+    .panel.open {
+      flex: 15;
+      font-size: 40px;
+    }
+    
+    @media only screen and (max-width: 600px) {
+      .panel p {
+        font-size: 1em;
+      }
+    }
+  </style>
+
+<div class="row justify-content-center m-2">
+    <nav class="navbar navbar-light bg-light justify-content-between rounded">
+        <a class="navbar-brand">Thou Art Voting</a>
+        <form class="form-inline" id="artworkForm">
+            <input class="form-control mr-sm-2" id="searchArtwork" type="search" placeholder="Search"
+                aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </nav>
+    <nav class="row navbar navbar-light bg-light justify-content-between rounded clearfix" id="nav2"></nav>
+    <nav class="row navbar navbar-light bg-light justify-content-between rounded clearfix" id="nav3"></nav>
+    <nav class="row navbar navbar-light bg-light justify-content-between rounded clearfix" id="nav4"></nav>
+</div>
+  <div class="panels">
+    <div class="panel panel1">
+      <p>1</p>
+    </div>
+    <div class="panel panel2">
+      <p>2</p>
+    </div>
+    <div class="panel panel3">
+      <p>3</p>
+    </div>
+    <div class="panel panel4">
+      <p>4</p>
+    </div>
+    <div class="panel panel5">
+      <p>5</p>
+    </div>
+    <div class="panel panel6">
+      <p>6</p>
+    </div>
+    <div class="panel panel7">
+      <p>7</p>
+    </div>
+    <div class="panel panel8">
+      <p>8</p>
+    </div>
+    <div class="panel panel9">
+      <p>9</p>
+    </div>
+    <div class="panel panel10">
+      <p>10</p>
+    </div>
+  </div>
+
+  <script>
+    const panels = document.querySelectorAll('.panel');
+
+    function toggleOpen() {
+      console.log('Hello');
+      panels.forEach(panel =>
+        panel.classList.contains('open') ? panel.classList.toggle('open') : console.log('does not contain'));
+      this.classList.toggle('open');
+    }
+
+    function toggleActive(e) {
+      console.log(e.propertyName);
+      if (e.propertyName.includes('flex')) {
+        this.classList.toggle('open-active');
+      }
+    }
+
+    panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+    panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
+  </script>
+
+</body>
+</html>
